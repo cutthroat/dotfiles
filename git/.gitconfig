@@ -1,0 +1,6 @@
+[user]
+    name = Your Name Here
+    email = your@mail.here
+
+[core]
+    excludesfile = ~/.gitignore

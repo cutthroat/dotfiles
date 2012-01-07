@@ -1,0 +1,11 @@
+# <perl hacks> ftw!
+alias reshell="$EDITOR $HOME/.zshrc; source $HOME/.zshrc"
+alias realias="$EDITOR $HOME/.aliases; source $HOME/.aliases"
+alias reperl="perl -wde0"
+
+alias em="emacsclient"
+alias ee="emacsclient -t"
+alias ec="emacsclient -c -n"
+
+alias grep="grep --color=auto"
+alias ls="ls --group-directories-first -F"

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openbox_menu>
+	<menu id="root-menu" label="OpenBox">
+		<item label="urxvt"> <action name="execute">
+			<execute>urxvt</execute>
+		</action> </item>
+		<item label="gvim"> <action name="execute">
+			<execute>gvim</execute>
+		</action> </item>
+		<item label="firefox"> <action name="execute">
+			<execute>firefox</execute>
+		</action> </item>
+		<item label="htop"> <action name="execute">
+			<execute>rxvt -e htop</execute>
+		</action> </item>
+		<separator/>
+		<item label="exit"> <action name="exit"/> </item>
+		<item label="reconfigure"> <action name="reconfigure"/> </item>
+		<menu id="client-list-menu"/>
+	</menu>
+</openbox_menu>

@@ -1,0 +1,6 @@
+Nice shell colors:
+
+    bg:#d6d6d6 fg:#000000
+    bg:#333333 fg:#cccccc
+    bg:#333333 fg:#e5e5e5
+    bg:#242424 fg:#cae682 from wombat color scheme for vim
