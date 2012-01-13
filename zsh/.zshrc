@@ -1,5 +1,5 @@
 setopt appendhistory histignorealldups extendedglob nomatch notify promptsubst
-setopt noautocd nobeep
+setopt noautocd nobeep nobgnice
 bindkey -v
 
 export PAGER=less
