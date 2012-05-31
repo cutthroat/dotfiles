@@ -26,6 +26,8 @@
 (global-set-key (kbd "C-x C-b") 'bs-show) ; or ibuffer
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-m") 'indent-new-comment-line) ; or 'reindent-then-newline-and-indent)
+(global-set-key (kbd "<f1>") 'bs-show)
+(global-set-key (kbd "<f2>") 'recompile)
 
 ;; interactively do things (insted of iswitchb-mode)
 ;(require 'ido)
@@ -40,7 +42,8 @@
             (setq dired-recursive-deletes t)
             (setq dired-dwim-target t)
             (setq dired-x-hands-off-my-keys nil)
-            (setq dired-listing-switches (concat dired-listing-switches " --group-directories-first")) ; note --g-d-f does't work for ftp
+            (setq dired-listing-switches
+                  (concat dired-listing-switches " --group-directories-first")) ; note --g-d-f does't work for ftp
             (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.[^.].*$")
             (put 'dired-find-alternate-file 'disabled nil)
             ))
@@ -68,7 +71,13 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
-(set-default-font "Terminus 12")
+(set-default-font "Terminus Bold 12")
+
+(add-to-list 'load-path "~/.elisp/color-theme")
+(require 'color-theme)
+(color-theme-initialize)
+(require 'color-theme-less)
+(color-theme-less)
 
 ;; yeah!
 ;(server-mode 1)
@@ -85,3 +94,24 @@
 
 ;; proof general
 (load-file "~/.elisp/ProofGeneral/generic/proof-site.el")
+
+;; eeeevil!
+(add-to-list 'load-path "~/.elisp/evil")
+(require 'evil)
+(evil-mode t)
+
+(define-key evil-normal-state-map (kbd "TAB") 'swap-buffer)
+(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-insert-state-map (kbd "C-n") 'dabbrev-expand)
+
+(evil-define-key 'normal bs-mode-map (kbd "C-m") 'bs-select)
+(evil-define-key 'normal bs-mode-map (kbd "i") 'bs-select)
+(evil-define-key 'normal bs-mode-map (kbd "d") 'bs-delete)
+
+(evil-ex-define-cmd "cn[ext]" 'next-error)
+(evil-ex-define-cmd "cp[revious]" 'previous-error)
+
+(defun swap-buffer ()
+  (interactive)
+  (switch-to-buffer (other-buffer))
+  )
