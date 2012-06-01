@@ -24,8 +24,7 @@
 
 ;; additional keys
 (global-set-key (kbd "C-x C-b") 'bs-show) ; or ibuffer
-(global-set-key (kbd "M-/") 'hippie-expand)
-(global-set-key (kbd "C-m") 'indent-new-comment-line) ; or 'reindent-then-newline-and-indent)
+(global-set-key (kbd "RET") 'indent-new-comment-line) ; or 'reindent-then-newline-and-indent)
 (global-set-key (kbd "<f1>") 'bs-show)
 (global-set-key (kbd "<f2>") 'recompile)
 
@@ -71,7 +70,7 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
-(set-default-font "Terminus Bold 12")
+(set-default-font "Terminus 12")
 
 (add-to-list 'load-path "~/.elisp/color-theme")
 (require 'color-theme)
@@ -102,10 +101,8 @@
 
 (define-key evil-normal-state-map (kbd "TAB") 'swap-buffer)
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-(define-key evil-insert-state-map (kbd "C-n") 'dabbrev-expand)
 
-(evil-define-key 'normal bs-mode-map (kbd "C-m") 'bs-select)
-(evil-define-key 'normal bs-mode-map (kbd "i") 'bs-select)
+(evil-define-key 'normal bs-mode-map (kbd "RET") 'bs-select)
 (evil-define-key 'normal bs-mode-map (kbd "d") 'bs-delete)
 
 (evil-ex-define-cmd "cn[ext]" 'next-error)
