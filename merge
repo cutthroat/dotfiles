@@ -1,0 +1,38 @@
+#!/bin/bash -e
+
+MERGETOOL=${MERGETOOL:-diff -u}
+
+y-n-q() {
+    local r
+    while true; do
+        read -r -N 1 -p '[Y/n/q] ' r
+        case $r in
+            [Yy]|"")
+                [[ -n $r ]] && echo
+                return 0
+            ;;
+            [Nn])
+                echo
+                return 1
+            ;;
+            [Qq]|$'\x04')
+                echo
+                exit 0
+            ;;
+        esac
+    done
+}
+
+if [[ ! -e .3c5d6c49-4e8e-4f23-ba4d-917e87a1fa52 ]]; then
+    echo 'This script must be run from the .dotfiles directory'
+    exit 1
+fi
+
+for b in $(find */ -type f); do
+    x=${b#*/}
+    a=$HOME/$x
+    [[ -e $a ]] || continue
+    cmp -s $a $b && continue
+    echo $x
+    y-n-q && $MERGETOOL $a $b || true
+done
