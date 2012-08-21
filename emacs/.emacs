@@ -4,6 +4,9 @@
 ;; useful
 (put 'narrow-to-region 'disabled nil)
 (put 'erase-buffer 'disabled nil)
+(display-time-mode t)
+(column-number-mode t)
+(set-fill-column 80)
 
 ;; general
 (setq inhibit-splash-screen t)
@@ -11,7 +14,7 @@
 (setq-default indent-tabs-mode nil)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; backup
+;; no backup
 (setq backup-inhibited t)
 
 ;; selection and parens
@@ -22,16 +25,18 @@
       show-paren-style 'parenthesis)
 (show-paren-mode t)
 
-;; additional keys
-(global-set-key (kbd "C-x C-b") 'bs-show) ; or ibuffer
-(global-set-key (kbd "RET") 'indent-new-comment-line) ; or 'reindent-then-newline-and-indent)
-(global-set-key (kbd "<f1>") 'bs-show)
-(global-set-key (kbd "<f2>") 'recompile)
+;; interactively do things (vs iswitchb-mode)
+(require 'ido)
+(ido-mode t)
+(setq ido-enable-flex-matching t)
 
-;; interactively do things (insted of iswitchb-mode)
-;(require 'ido)
-;(ido-mode t)
-;(setq ido-enable-flex-matching t)
+;; additional keys
+(global-set-key (kbd "RET") 'newline-and-indent) ; 'reindent-then-newline-and-indent)
+(global-set-key (kbd "<f3>") 'ido-find-file)
+(global-set-key (kbd "<f4>") 'ido-switch-buffer)
+(global-set-key (kbd "<f5>") 'bs-show) ; or ibuffer
+(global-set-key (kbd "<f9>") 'recompile)
+(global-set-key (kbd "<f10>") 'magit-status)
 
 ;; fix dired
 (add-hook 'dired-load-hook
@@ -70,13 +75,12 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
-(set-default-font "Terminus 12")
+(set-default-font "Terminus-10")
 
 (add-to-list 'load-path "~/.elisp/color-theme")
 (require 'color-theme)
 (color-theme-initialize)
-(require 'color-theme-less)
-(color-theme-less)
+(color-theme-charcoal-black) ; other nice themes are clarity, blue-sea and less
 
 ;; yeah!
 ;(server-mode 1)
@@ -84,23 +88,37 @@
 ;; pimp C mode
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (c-set-style "k&r")
-	    (c-set-offset 'arglist-cont '*)
-            (c-set-offset 'arglist-cont-nonempty '*)
-            (c-set-offset 'statement-cont '*)
-            (setq c-basic-offset 8)
+            (c-set-style "linux")
+            ;(c-set-offset 'arglist-cont '*)
+            ;(c-set-offset 'arglist-cont-nonempty '*)
+            ;(c-set-offset 'statement-cont '*)
+            ;(setq c-basic-offset 8)
+	    (setq indent-tabs-mode t)
             ))
 
 ;; proof general
-(load-file "~/.elisp/ProofGeneral/generic/proof-site.el")
+;(load-file "~/.elisp/ProofGeneral/generic/proof-site.el")
+
+;; magit
+(add-to-list 'load-path "~/.elisp/magit")
+(require 'magit)
+
+;; haskell
+(load "~/.elisp/haskell-mode/haskell-site-file")
+(add-hook 'haskell-mode-hook
+          (lambda ()
+            (turn-on-haskell-indent)
+            ))
 
 ;; eeeevil!
 (add-to-list 'load-path "~/.elisp/evil")
 (require 'evil)
 (evil-mode t)
 
-(define-key evil-normal-state-map (kbd "TAB") 'swap-buffer)
+(define-key evil-normal-state-map (kbd "\]") 'next-buffer)
+(define-key evil-normal-state-map (kbd "\[") 'previous-buffer)
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-normal-state-map (kbd "C-a") 'universal-argument)
 
 (evil-define-key 'normal bs-mode-map (kbd "RET") 'bs-select)
 (evil-define-key 'normal bs-mode-map (kbd "d") 'bs-delete)
