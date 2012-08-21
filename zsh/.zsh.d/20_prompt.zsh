@@ -12,7 +12,7 @@ set_title() { # see ^1
             ;;
     esac
 }
-precmd_functions=(set_title)
+precmd_functions+=(set_title)
 set_title
 
 # this is for emacs' ansi-term

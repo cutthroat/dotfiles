@@ -16,3 +16,4 @@ syntax off
 
 map <TAB> <C-^>
 map <C-M> :make -s %:r && ./%:r<CR>
+map <F1> :make<CR>
