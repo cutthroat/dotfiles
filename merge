@@ -24,7 +24,7 @@ y-n-q() {
 }
 
 if [[ ! -e .3c5d6c49-4e8e-4f23-ba4d-917e87a1fa52 ]]; then
-    echo 'This script must be run from the .dotfiles directory'
+    echo 'This script must be run from the dotfiles directory'
     exit 1
 fi
 
