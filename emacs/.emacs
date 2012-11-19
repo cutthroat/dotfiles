@@ -1,6 +1,15 @@
 ;; local packages
 (add-to-list 'load-path "~/.elisp")
 
+;; darwin sepcific setup
+(when (eq system-type 'darwin)
+  ; keys
+  (setq mac-option-modifier 'super)
+  (setq mac-command-modifier 'meta)
+  ; path
+  (setq exec-path (cons "~/homebrew/bin" exec-path))
+  )
+
 ;; useful
 (put 'narrow-to-region 'disabled nil)
 (put 'erase-buffer 'disabled nil)
@@ -130,3 +139,6 @@
   (interactive)
   (switch-to-buffer (other-buffer))
   )
+
+;; python
+(setq python-python-command "python3")
