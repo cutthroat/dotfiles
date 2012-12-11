@@ -1,3 +1,5 @@
+# 30_prompt.zsh
+
 # (we don't need no fancy themes)
 if [[ -n $(who mom likes | awk '{print $5}' | tr -d '()') ]]; then
     PROMPT='%n@%m %2~%# '
